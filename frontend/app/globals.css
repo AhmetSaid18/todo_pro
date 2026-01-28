@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-glow: var(--primary-glow);
+  
+  --color-glass-100: var(--glass-100);
+  --color-glass-200: var(--glass-200);
+  --color-glass-300: var(--glass-300);
+  --color-glass-border: var(--glass-border);
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+:root {
+  /* Default to Dark Mode (Production Aesthetic) */
+  --background: #050505;
+  --foreground: #ffffff;
+  
+  /* Primary: Electric Purple/Blue */
+  --primary: #6d28d9;
+  --primary-glow: #8b5cf6;
+  
+  /* Glassmorphism Variables */
+  --glass-100: rgba(255, 255, 255, 0.03);
+  --glass-200: rgba(255, 255, 255, 0.08);
+  --glass-300: rgba(255, 255, 255, 0.12);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  
+  /* Fonts */
+  --font-geist-sans: "Inter", sans-serif; /* Fallback until font loaded */
+  --font-geist-mono: "Fira Code", monospace; 
+}
+
+@layer base {
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+}
+
+@layer utilities {
+  /* 
+   * GLASSMORPHISM UTILITIES 
+   * The core of our "Midnight Glass" theme
+   */
+  .glass {
+    @apply bg-[var(--glass-100)] backdrop-blur-md border border-[var(--glass-border)];
+  }
+  
+  .glass-card {
+    @apply bg-[var(--glass-200)] backdrop-blur-xl border border-[var(--glass-border)] shadow-lg hover:bg-[var(--glass-300)] transition-all duration-300;
+  }
+  
+  .glass-input {
+    @apply bg-[var(--glass-100)] border border-[var(--glass-border)] text-white placeholder-gray-400 focus:border-[var(--primary-glow)] focus:ring-1 focus:ring-[var(--primary-glow)] outline-none transition-all duration-300 backdrop-blur-sm;
+  }
+  
+  .glass-button {
+    @apply bg-[var(--primary)] text-white font-medium hover:bg-[var(--primary-glow)] transition-all duration-300 shadow-[0_0_15px_rgba(109,40,217,0.3)] hover:shadow-[0_0_25px_rgba(139,92,246,0.5)];
+  }
+
+  .text-glow {
+    text-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+  }
+  
+  .neon-border {
+    box-shadow: 0 0 5px var(--primary), inset 0 0 5px var(--primary);
+  }
+}
+
+/* Animations */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
